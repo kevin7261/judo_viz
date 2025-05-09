@@ -2,7 +2,7 @@
 #!pip install -q streamlit pyngrok
 
 # ✅ Step 2：設定 ngrok Token（請將下方改成你自己的 token）
-NGROK_AUTH_TOKEN = "2wpA0Zz2r4xm6Q7dTcGROhTi5Nu_2HH2zW6tvp8yAv2GnM4Ce"  # ⬅️ 改這行！
+#NGROK_AUTH_TOKEN = "2wpA0Zz2r4xm6Q7dTcGROhTi5Nu_2HH2zW6tvp8yAv2GnM4Ce"  # ⬅️ 改這行！
 
 # ✅ Step 3：定義 app.py 主程式
 app_code = """
@@ -894,27 +894,6 @@ secondary_value: {sub}'''
 if __name__ == "__main__":
     build_streamlit_ui()
 """
-
-# ✅ Step 4：寫入 app.py 檔案
-with open("app.py", "w") as f:
-    f.write(app_code)
-
-# ✅ Step 5：啟動 Streamlit 並用 ngrok 開放外部訪問
-from pyngrok import conf, ngrok
-import time, os, threading
-
-# 註冊 ngrok token
-conf.get_default().auth_token = NGROK_AUTH_TOKEN
-ngrok.kill()  # 關閉舊隧道
-
-def run():
-    os.system("streamlit run app.py")
-
-# 啟動 streamlit app
-thread = threading.Thread(target=run)
-thread.start()
-time.sleep(5)
-
-# 開放 port 8501 的網頁訪問
-public_url = ngrok.connect(8502)
-print("✅ Streamlit 介面網址：", public_url)
+# ===== 執行應用 =====
+if __name__ == "__main__":
+    build_streamlit_ui()
