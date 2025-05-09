@@ -1,10 +1,3 @@
-# ✅ Step 1：安裝必要套件
-#!pip install -q streamlit pyngrok
-
-# ✅ Step 2：設定 ngrok Token（請將下方改成你自己的 token）
-#NGROK_AUTH_TOKEN = "2wpA0Zz2r4xm6Q7dTcGROhTi5Nu_2HH2zW6tvp8yAv2GnM4Ce"  # ⬅️ 改這行！
-
-# ✅ Step 3：定義 app.py 主程式
 app_code = """
 
 SHEET_URL_VIZ = 'https://docs.google.com/spreadsheets/d/1A8wULZkw8SYx4_jkv2xbcUhaQuUEy1k-J_L8MpSkf-U/edit?usp=sharing'
