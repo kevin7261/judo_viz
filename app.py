@@ -889,11 +889,7 @@ selected_function: {selected_function}
 selected_function_text: {selected_function_text}
 secondary_value: {sub}'''
             st.text_area("📌 DEBUG 傳入參數", debug, height=150)
-
-# ===== 執行應用 =====
-if __name__ == "__main__":
-    build_streamlit_ui()
 """
-# ===== 執行應用 =====
-if __name__ == "__main__":
-    build_streamlit_ui()
+
+# 真正執行 app_code
+exec(app_code)
