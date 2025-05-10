@@ -446,7 +446,6 @@ def drawData_winnerCountry_map(grouped_df: pd.DataFrame,
         )
         display(html_widget)
 
-import gradio as gr
 from matplotlib import pyplot as plt
 import io, base64
 
