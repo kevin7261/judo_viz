@@ -559,16 +559,6 @@ def build_streamlit_ui():
                 ippon_child=ippon_child
             )
 
-            # ✅ 顯示目前選擇
-            st.markdown(f'''
-**✅ 目前選擇**
-- 分類：{tab_name}
-- 屬性：{attr}
-- 屬性分類：{sub if sub else '無'}
-- 賽事：{year_label}
-- ippon戰技：{f"{ippon_main}:{ippon_sub}:{ippon_child}" if ippon_main else "無"}
-''')
-
             # ✅ 顯示圖表
             st.components.v1.html(html, height=600, scrolling=True)
 
