@@ -320,6 +320,7 @@ def drawData_winnerCountry_map(grouped_df: pd.DataFrame,
                                title: str = "",
                                legend_mapping: dict = None,
                                ippon_group_name: str = None,
+                               is_gradio: bool = False):  # ✅ 傳入 "投技:立技:足技" 這類格式
 
     fig_width_px = 1000  # 地圖寬度
     fig_height_px = 800  # 地圖高度
