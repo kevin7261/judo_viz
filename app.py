@@ -312,7 +312,6 @@ import math  # 數學運算
 import pandas as pd  # 資料處理
 import seaborn as sns  # 色彩選擇
 from matplotlib.colors import to_hex  # 將 RGB 顏色轉為 HEX 格式
-import ipywidgets as widgets  # Jupyter 的互動元件
 
 def drawData_winnerCountry_map(grouped_df: pd.DataFrame,
                                df_olympic_countries: pd.DataFrame,
