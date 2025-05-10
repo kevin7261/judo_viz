@@ -2,7 +2,6 @@ app_code = """
 
 SHEET_URL_VIZ = 'https://docs.google.com/spreadsheets/d/1A8wULZkw8SYx4_jkv2xbcUhaQuUEy1k-J_L8MpSkf-U/edit?usp=sharing'
 
-# @title 國家資料定義
 olympic_countries = [
     {"id": 1, "english_name": "Afghanistan", "chinese_name": "阿富汗", "code": "AFG", "latitude": 33.93911, "longitude": 67.709953, "continent": "Asia"},
     {"id": 2, "english_name": "Albania", "chinese_name": "阿爾巴尼亞", "code": "ALB", "latitude": 41.153332, "longitude": 20.168331, "continent": "Europe"},
@@ -212,125 +211,12 @@ df_olympic_countries = pd.DataFrame(olympic_countries)
 
 # ===== 模擬資料結構（請替換為你實際的）=====
 DROPDOWN_OPTIONS = {
-    "比賽事件": [
-        ("比賽事件類型", "比賽事件類型"),
-        ("比賽事件時序分布-時序圖", "全部比賽"),
-        ("比賽事件時序分布-小提琴圖", "全部比賽"),
-    ],
-    "比賽時間": [
-        ("比賽時間>有無Ippon比賽", "比賽時間>有無Ippon比賽"),
-        ("比賽時間>性別", "比賽時間>性別"),
-        ("比賽時間>量級", "比賽時間>量級"),
-        ("比賽時間>對手Shido次數", "比賽時間>對手Shido次數"),
-        ("有Ippon比賽時間>對手Shido時間", "有Ippon比賽時間>對手Shido時間"),
-    ],
-    "事件間隔": [
-        ("事件間隔>有無Ippon比賽", "事件間隔>有無Ippon比賽"),
-        ("事件間隔>不同Shido次數下的獲勝機率", "事件間隔>不同Shido次數下的獲勝機率"),
-    ],
-    "量級": [
-        ("量級>有無Ippon比賽", "量級>有無Ippon比賽"),
-    ],
-    "Ippon技術": [
-        ("Ippon技術分類>量級", "Ippon技術分類>量級"),
-        ("Ippon技術>量級", "Ippon技術>量級"),
-    ],
     "勝者國家": [
-        ("勝者國家>有無Ippon比賽", "勝者國家>有無Ippon比賽"),
-        ("勝者國家>對手Shido次數", "勝者國家>對手Shido次數"),
-        ("勝者國家>Ippon技術分類", "勝者國家>Ippon技術分類"),
-        ("勝者國家>Ippon技術分類(地圖)", "勝者國家>Ippon技術分類"),
-    ],
-    "比賽預測": [
+        ("勝者國家>Ippon技術分類(地圖)", "勝者國家>Ippon技術分類(地圖)"),
     ],
 }
 
 SECONDARY_DROPDOWN_MAP = {
-    "比賽事件時序分布-時序圖": ["類型1-對手3次Shido或1次H",
-                            "類型2-勝者1次Waza-ari,0次Ippon;對手0次Waza-ari",
-                            "類型3-勝者2次Waza-ari,0次Ippon;對手0次Waza-ari",
-                            "類型4-勝者2次Waza-ari,0次Ippon;對手1次Waza-ari",
-                            "類型5-勝者1次Ippon,0次Waza-ari;對手0次Waza-ari",
-                            "類型6-勝者1次Ippon,0次Waza-ari;對手1次Waza-ari",
-                            "類型7-勝者1次Ippon,1次Waza-ari;對手0次Waza-ari",
-                            "類型8-勝者1次Ippon,1次Waza-ari;對手1次Waza-ari",
-                            "類型0-不屬於以上任一類型"],
-    "比賽事件時序分布-小提琴圖": ["類型1-對手3次Shido或1次H",
-                            "類型2-勝者1次Waza-ari,0次Ippon;對手0次Waza-ari",
-                            "類型3-勝者2次Waza-ari,0次Ippon;對手0次Waza-ari",
-                            "類型4-勝者2次Waza-ari,0次Ippon;對手1次Waza-ari",
-                            "類型5-勝者1次Ippon,0次Waza-ari;對手0次Waza-ari",
-                            "類型6-勝者1次Ippon,0次Waza-ari;對手1次Waza-ari",
-                            "類型7-勝者1次Ippon,1次Waza-ari;對手0次Waza-ari",
-                            "類型8-勝者1次Ippon,1次Waza-ari;對手1次Waza-ari",
-                            "類型0-不屬於以上任一類型"],
-    "比賽時間>有無Ippon比賽": ["全部比賽",
-                            "全部男子比賽",
-                            "全部女子比賽",
-                            "全部有Ippon比賽",
-                            "全部無Ippon比賽",
-                            "男子有Ippon比賽",
-                            "男子無Ippon比賽",
-                            "女子有Ippon比賽",
-                            "女子無Ippon比賽"],
-    "比賽時間>性別": ["全部比賽",
-                    "全部有Ippon比賽",
-                    "全部無Ippon比賽"],
-    "比賽時間>量級": ["全部男子比賽",
-                    "全部女子比賽",
-                    "男子有Ippon比賽",
-                    "男子無Ippon比賽",
-                    "女子有Ippon比賽",
-                    "女子無Ippon比賽"],
-    "比賽時間>對手Shido次數": ["全部比賽",
-                            "全部男子比賽",
-                            "全部女子比賽",
-                            "全部有Ippon比賽",
-                            "全部無Ippon比賽",
-                            "男子有Ippon比賽",
-                            "男子無Ippon比賽",
-                            "女子有Ippon比賽",
-                            "女子無Ippon比賽"],
-    "有Ippon比賽時間>對手Shido時間": ["對手0次Shido",
-                                "對手1次Shido",
-                                "對手2次Shido"],
-    "事件間隔>有無Ippon比賽": ["勝者第1次Shido到結束",
-                            "勝者第2次Shido到結束",
-                            "勝者最後Shido到結束",
-                            "對手第1次Shido到結束",
-                            "對手第2次Shido到結束",
-                            "對手最後Shido到結束"],
-    "事件間隔>不同Shido次數下的獲勝機率": ["勝者0次Shido",
-                                    "勝者1次Shido",
-                                    "勝者2次Shido",
-                                    "對手0次Shido",
-                                    "對手1次Shido",
-                                    "對手2次Shido"],
-    "量級>有無Ippon比賽": ["全部男子比賽",
-                        "全部女子比賽",
-                        "男子有Ippon比賽",
-                        "男子無Ippon比賽",
-                        "女子有Ippon比賽",
-                        "女子無Ippon比賽"],
-    "Ippon技術分類>量級": ["男子有Ippon比賽", "女子有Ippon比賽"],
-    "Ippon技術>量級": ["男子有Ippon比賽", "女子有Ippon比賽"],
-    "勝者國家>有無Ippon比賽": ["全部比賽",
-                            "全部男子比賽",
-                            "全部女子比賽",
-                            "男子有Ippon比賽",
-                            "男子無Ippon比賽",
-                            "女子有Ippon比賽",
-                            "女子無Ippon比賽"],
-    "勝者國家>對手Shido次數": ["全部比賽",
-                            "全部男子比賽",
-                            "全部女子比賽",
-                            "男子有Ippon比賽",
-                            "男子無Ippon比賽",
-                            "女子有Ippon比賽",
-                            "女子無Ippon比賽"],
-    "勝者國家>Ippon技術分類": ["全部Ippon比賽",
-                            "男子有Ippon比賽",
-                            "女子有Ippon比賽"],
     "勝者國家>Ippon技術分類(地圖)": ["全部Ippon比賽",
                             "男子有Ippon比賽",
                             "女子有Ippon比賽"],
@@ -349,70 +235,40 @@ YEARS_DATA = [
     {"year": "17", "game": "championships", "label": "17世錦", "source_sheet_id": "1BEzcYM8phoaimrzGcVEAN69ZPg8UxWpyPVAv9kSQaAM"},
 ]
 
+IPPON_DROPDOWN_MAP_1 = {
+    "全部": ["-"],
+    "固技": ["-", "抑技", "絞技", "関節技"],
+    "投技": ["-", "立技", "捨身技"],
+    "未分群": ["-"],
+    "無資料": ["-"],
+}
+
+IPPON_DROPDOWN_MAP_2 = {
+    "-": ["-"],
+    "全部": ["-"],
+    "抑技": ["-"],
+    "絞技": ["-"],
+    "関節技": ["-"],
+    "立技": ["-", "手技", "腰技", "足技", "不分群"],
+    "捨身技": ["-", "前捨身技", "橫捨身技", "橫捨身技"],
+}
+
 from urllib.parse import quote  # 對中文 sheet 名稱進行 URL 編碼
 
-# ✅ 手動建立 sheet_name → gid 對應表（從 Google Sheet 網址列複製）
-SHEET_GID_MAPPING = {'說明': '0',
- '全部比賽': '872024582',
- '比賽事件類型': '1525614645',
- '比賽時間>有無Ippon比賽>全部比賽': '1240699646',
- '比賽時間>有無Ippon比賽>全部男子比賽': '633142426',
- '比賽時間>有無Ippon比賽>全部女子比賽': '1357132266',
- '比賽時間>有無Ippon比賽>全部有Ippon比賽': '951726476',
- '比賽時間>有無Ippon比賽>全部無Ippon比賽': '562829201',
- '比賽時間>有無Ippon比賽>男子有Ippon比賽': '2031586368',
- '比賽時間>有無Ippon比賽>男子無Ippon比賽': '1424822772',
- '比賽時間>有無Ippon比賽>女子有Ippon比賽': '545973195',
- '比賽時間>有無Ippon比賽>女子無Ippon比賽': '1102871995',
- '比賽時間>性別>全部比賽': '1736358888',
- '比賽時間>性別>全部有Ippon比賽': '1619822953',
- '比賽時間>性別>全部無Ippon比賽': '1361965454',
- '比賽時間>量級>全部男子比賽': '1228767930',
- '比賽時間>量級>全部女子比賽': '288958209',
- '比賽時間>量級>男子有Ippon比賽': '1981890526',
- '比賽時間>量級>男子無Ippon比賽': '437879381',
- '比賽時間>量級>女子有Ippon比賽': '337480956',
- '比賽時間>量級>女子無Ippon比賽': '1489434547',
- '比賽時間>對手Shido次數>全部比賽': '1595257824',
- '比賽時間>對手Shido次數>全部男子比賽': '682391898',
- '比賽時間>對手Shido次數>全部女子比賽': '1390246770',
- '比賽時間>對手Shido次數>全部有Ippon比賽': '104313116',
- '比賽時間>對手Shido次數>全部無Ippon比賽': '567894120',
- '比賽時間>對手Shido次數>男子有Ippon比賽': '1570666285',
- '比賽時間>對手Shido次數>男子無Ippon比賽': '1984505036',
- '比賽時間>對手Shido次數>女子有Ippon比賽': '500129666',
- '比賽時間>對手Shido次數>女子無Ippon比賽': '625820423',
- '有Ippon比賽時間>對手Shido時間': '1930222422',
- '事件間隔>有無Ippon比賽': '250410432',
- '事件間隔>不同Shido次數下的獲勝機率': '304683613',
- '量級>有無Ippon比賽>全部男子比賽': '779920548',
- '量級>有無Ippon比賽>全部女子比賽': '149110490',
- '量級>有無Ippon比賽>男子有Ippon比賽': '1775455844',
- '量級>有無Ippon比賽>男子無Ippon比賽': '2074186581',
- '量級>有無Ippon比賽>女子有Ippon比賽': '367702625',
- '量級>有無Ippon比賽>女子無Ippon比賽': '422735272',
- 'Ippon技術分類>量級': '1067673885',
- 'Ippon技術>量級': '1995305121',
- '勝者國家>有無Ippon比賽>全部比賽': '399049694',
- '勝者國家>有無Ippon比賽>全部男子比賽': '950988044',
- '勝者國家>有無Ippon比賽>全部女子比賽': '620453868',
- '勝者國家>有無Ippon比賽>男子有Ippon比賽': '985699339',
- '勝者國家>有無Ippon比賽>男子無Ippon比賽': '385667192',
- '勝者國家>有無Ippon比賽>女子有Ippon比賽': '1598806365',
- '勝者國家>有無Ippon比賽>女子無Ippon比賽': '1617001311',
- '勝者國家>對手Shido次數>全部比賽': '1596371645',
- '勝者國家>對手Shido次數>全部男子比賽': '965130206',
- '勝者國家>對手Shido次數>全部女子比賽': '49109413',
- '勝者國家>對手Shido次數>男子有Ippon比賽': '567425998',
- '勝者國家>對手Shido次數>男子無Ippon比賽': '1036949076',
- '勝者國家>對手Shido次數>女子有Ippon比賽': '436910145',
- '勝者國家>對手Shido次數>女子無Ippon比賽': '1632516609',
- '勝者國家>勝者Ippon技術': '1270451732',
- '勝者國家>Ippon技術分類>全部Ippon比賽': '876829084',
- '勝者國家>Ippon技術分類>男子有Ippon比賽': '2056685237',
- '勝者國家>Ippon技術分類>女子有Ippon比賽': '814372721'}
+SHEET_GID_MAPPING = {
+ '勝者國家>Ippon技術分類(地圖)>全部Ippon比賽-1': '638546443',
+ '勝者國家>Ippon技術分類(地圖)>男子有Ippon比賽-1': '1071718401',
+ '勝者國家>Ippon技術分類(地圖)>女子有Ippon比賽-1': '1104268805',
+ '勝者國家>Ippon技術分類(地圖)>全部Ippon比賽-2': '1946909308',
+ '勝者國家>Ippon技術分類(地圖)>男子有Ippon比賽-2': '1435903933',
+ '勝者國家>Ippon技術分類(地圖)>女子有Ippon比賽-2': '1484551104',
+ '勝者國家>Ippon技術分類(地圖)>全部Ippon比賽-3': '572016594',
+ '勝者國家>Ippon技術分類(地圖)>男子有Ippon比賽-3': '595503184',
+ '勝者國家>Ippon技術分類(地圖)>女子有Ippon比賽-3': '1859043650',
+ '勝者國家>Ippon技術分類(地圖)>全部Ippon比賽': '1298109612',
+ '勝者國家>Ippon技術分類(地圖)>男子有Ippon比賽': '28792196',
+ '勝者國家>Ippon技術分類(地圖)>女子有Ippon比賽': '942645638'}
 
-# ✅ 主函式：讀取 Google Sheet 指定工作表的 CSV 並回傳過濾後的資料與資訊
 def loadData_bySheetName(label: str, source_sheet_url: str, sheet_name: str):
 
     # ✅ 擷取試算表 ID
@@ -453,381 +309,195 @@ def loadData_bySheetName(label: str, source_sheet_url: str, sheet_name: str):
 import matplotlib.pyplot as plt
 import pandas as pd
 
-def drawData_contestType(df: pd.DataFrame,
-                         label: str,
-                         title: str = "",
-                         specified_cmap: str = "tab10",
-                         is_gradio: bool = False):
+import folium  # 用於地圖繪製
+import math  # 數學運算
+import pandas as pd  # 資料處理
+import seaborn as sns  # 色彩選擇
+from IPython.display import display, HTML  # 顯示 HTML 元素
+from matplotlib.colors import to_hex  # 將 RGB 顏色轉為 HEX 格式
+import ipywidgets as widgets  # Jupyter 的互動元件
 
-    # ====================================
-    # 📂 資料處理區塊
-    # ====================================
+def drawData_winnerCountry_map(grouped_df: pd.DataFrame,
+                               df_olympic_countries: pd.DataFrame,
+                               label: str,
+                               top_n: int = 100,
+                               title: str = "",
+                               legend_mapping: dict = None,
+                               ippon_group_name: str = None,
+                               is_gradio: bool = False):  # ✅ 傳入 "投技:立技:足技" 這類格式
 
-    df = df.copy()
+    fig_width_px = 1000  # 地圖寬度
+    fig_height_px = 800  # 地圖高度
+    twn_color = 'Crimson'  # 特別顯示台灣
+    min_radius = 2  # 最小圓形半徑
+    max_radius = 60  # 最大圓形半徑
+    scale_factor = 1.0  # 縮放因子
 
-    # 🔢 補齊 Type 0–8，缺的補0
-    all_types = pd.DataFrame({'contest_type': list(range(9))})
-    df["contest_type"] = pd.to_numeric(df["contest_type"], errors="coerce").fillna(0).astype(int)
-    df = pd.merge(all_types, df, on="contest_type", how="left").fillna(0)
-    df["count"] = pd.to_numeric(df["count"], errors="coerce").fillna(0).astype(int)
+    # ✅ 建立國家代碼對應經緯度座標
+    coord = {row["code"]: (row["latitude"], row["longitude"]) for _, row in df_olympic_countries.iterrows()}
 
-    # 🔢 計算總數
-    total = df["count"].sum()
+    # ✅ 建立洲別顏色對應字典
+    unique_continents = df_olympic_countries['continent'].unique()
+    palette_rgb = sns.color_palette('tab10', len(unique_continents))
+    palette_hex = [to_hex(c) for c in palette_rgb]
+    continent_colors = dict(zip(unique_continents, palette_hex))
 
-    # 🔢 Pie 數據與標籤
-    sizes = df["count"].tolist()
-    type_labels = [f"Type {t}" for t in df["contest_type"]]
-    labels_for_legend = [
-        f"{label} - {count} ({count / total * 100:.1f}%)"
-        for label, count in zip(type_labels, sizes)
-    ]
+    # 🔍 過濾指定 label 的資料
+    df = grouped_df.copy()
+    df = df[df["label"] == label].copy()
 
-    # ✅ 只顯示 >=10% 的標籤
-    def label_if_large(pct, count, label):
-        return f""
-
-    def make_autopct(sizes, labels):
-        def my_autopct(pct):
-            total = sum(sizes)
-            val = pct / 100 * total
-            closest = min(range(len(sizes)), key=lambda i: abs(sizes[i] - val))
-            return label_if_large(pct, sizes[closest], labels[closest])
-        return my_autopct
-
-    # ====================================
-    # 🎨 顏色設定區塊
-    # ====================================
-
-    cmap = plt.get_cmap(specified_cmap)
-    colors = [cmap(i % cmap.N) for i in range(len(df))]
-
-    # ====================================
-    # 📊 繪圖區塊
-    # ====================================
-
-    # ✅ 建立畫布（適度預留 legend 空間）
-    fig, ax = plt.subplots(figsize=(7.5, 5), dpi=100)
-    fig.subplots_adjust(right=0.7)  # 🔁 給 legend 保留右側空間
-
-    # ✅ 繪製 pie chart
-    wedges, texts, autotexts = ax.pie(
-        sizes,
-        labels=None,
-        autopct=make_autopct(sizes, type_labels),
-        startangle=90,
-        counterclock=False,
-        colors=colors,
-        textprops={'color': 'black'}
-    )
-
-    # ✅ legend 放右上外側，無外框
-    ax.legend(
-        handles=wedges,
-        labels=labels_for_legend,
-        title=f"總數: {total}",
-        loc="upper left",
-        bbox_to_anchor=(1.0, 1.0),
-        frameon=False
-    )
-
-    # ✅ 圖表標題
-    ax.set_title(f"{title} ({label})")
-
-    # ✅ 自動排版
-    plt.tight_layout()
-
-    # ✅ 顯示或回傳 HTML（依據執行環境）
-    if is_gradio:
-        import io, base64
-        buf = io.BytesIO()  # 建立記憶體緩衝區
-        plt.savefig(buf, format='png', bbox_inches='tight')  # 儲存圖表到緩衝區
-        buf.seek(0)  # 重設指標
-        img_base64 = base64.b64encode(buf.read()).decode('utf-8')  # 轉 base64
-        plt.close(fig)  # 關閉圖表
-        return f'<img src="data:image/png;base64,{img_base64}" style="max-width:100%; border:1px solid #ccc;">'  # 回傳 HTML 字串
+    # ✅ 根據 ippon_group_name 參數決定用哪個欄位計算數量
+    if ippon_group_name is None or str(ippon_group_name).lower() == "none":
+        df["total"] = pd.to_numeric(df["total"], errors="coerce").fillna(0).astype(int)
     else:
-        plt.show()  # Jupyter 用
+        # ✅ 從所有欄位中找出「= 之後為 ippon_group_name」的欄位（不限定前綴）
+        match_cols = [
+            col for col in df.columns
+            if "=" in col and col.split("=", 1)[-1] == ippon_group_name
+        ]
+        if not match_cols:
+            raise ValueError(f"❌ 無法對應到欄位：*= {ippon_group_name}")
+        col_name = match_cols[0]  # ✅ 正確欄位名稱
+        df["total"] = pd.to_numeric(df[col_name], errors="coerce").fillna(0).astype(int)
 
-def executeDrawData_2(year_data, selected_function, selected_function_text, secondary_value=None):
-    '''
-    ✅ 根據選擇的 tab、屬性、屬性分類與賽事，繪製對應圖表並回傳 HTML 字串（Gradio 專用）
-    '''
+    # 🔢 取前 top_n 的國家
+    df = df.sort_values(by="total", ascending=False).head(top_n).copy()
+    top_countries = df["winner_country"].tolist()
+    if "TWN" not in top_countries and "TWN" in grouped_df["winner_country"].unique():
+        top_countries.append("TWN")
+
+    # ✅ 建立地圖
+    m = folium.Map(
+        location=[20, 0],  # 初始中心點
+        zoom_start=2,  # 初始縮放
+        control_scale=True,
+        tiles='CartoDB PositronNoLabels',  # 背景圖層
+        width=fig_width_px,
+        height=fig_height_px
+    )
+
+    # ✅ 計算數量的平方根範圍（用於圓形半徑正規化）
+    min_count = df["total"].min()
+    max_count = df["total"].max()
+    min_sqrt = math.sqrt(min_count) if min_count > 0 else 0
+    max_sqrt = math.sqrt(max_count) if max_count > 0 else 1
+    radius_range = max_radius - min_radius
+
+    # ✅ 加入圓形與標籤
+    for _, row in df.iterrows():
+        code = row["winner_country"]
+        count = row["total"]
+        if code not in coord or count == 0:
+            continue  # ⛔ 國家無座標或數量為 0，就略過
+
+        # ✅ 計算圓形半徑（依據數量平方根正規化）
+        radius = min_radius + ((math.sqrt(count) - min_sqrt) / (max_sqrt - min_sqrt)) * radius_range * scale_factor
+
+        # ✅ 設定填色與字色
+        if code == "TWN":
+            fill_color = twn_color
+            text_color = twn_color
+        else:
+            continent = df_olympic_countries.set_index("code").get("continent", {}).get(code, "Other")
+            fill_color = continent_colors.get(continent, "gray")
+            text_color = "black"
+
+        # ✅ Tooltip 顯示文字（可轉換成 legend 名）
+        label_text = legend_mapping.get(code, code) if legend_mapping else code
+        tooltip_text = f"{label_text}: {count}"
+
+        # ✅ 畫圓形標記
+        folium.CircleMarker(
+            location=coord[code],  # 圓心位置
+            radius=radius,  # 半徑
+            fill=True,
+            color=None,
+            fill_opacity=0.4,
+            fill_color=fill_color,
+            tooltip=tooltip_text
+        ).add_to(m)
+
+        # ✅ 顯示國家代碼與數值文字標籤
+        folium.Marker(
+            location=coord[code],
+            tooltip=tooltip_text,
+            icon=folium.DivIcon(html=f'''
+                <div style="
+                    font-size: 14px;
+                    color: {text_color};
+                    text-align: center;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    white-space: nowrap;
+                    line-height: 1.2;">
+                    <b>{code}</b><br>{count}
+                </div>
+            ''')
+        ).add_to(m)
+
+    # ✅ 顯示地圖（根據 is_gradio 方式不同）
+    html_output = f'<div style="width: {fig_width_px}px; height: {fig_height_px}px">{m._repr_html_()}</div>'
+
+    if is_gradio:
+        return html_output
+    else:
+        html_widget = widgets.HTML(
+            value=html_output,
+            placeholder='地圖載入中...',
+            description=''
+        )
+        display(html_widget)
+
+import gradio as gr
+from matplotlib import pyplot as plt
+import io, base64
+
+def executeDrawData_2(year_data, selected_function, selected_function_text, output, 
+                      secondary_value=None, ippon_main=None, ippon_sub=None, ippon_child=None):
+
     img_base64 = None  # 預設為空
 
-    # ✅ 比賽事件類型
-    if selected_function_text == "比賽事件類型":
+    if selected_function_text == "勝者國家>Ippon技術分類(地圖)":
 
-        df, info1, info2 = loadData_bySheetName(year_data["label"], SHEET_URL_VIZ, f"{selected_function}")
+        if ippon_main == "全部":
 
-        img_base64 = drawData_contestType(df,
-                                          label=year_data["label"],
-                                          title=selected_function_text,
-                                          is_gradio=True)
+            df, info1, info2 = loadData_bySheetName(year_data["label"], SHEET_URL_VIZ, f"{selected_function}>{secondary_value}")
 
-    elif selected_function_text == "比賽事件時序分布-時序圖":
-
-        df, info1, info2 = loadData_bySheetName(year_data["label"], SHEET_URL_VIZ, f"{selected_function}")
-
-        if secondary_value == "類型1-對手3次Shido或1次H":
-            contestType = 1
-        elif secondary_value == "類型2-勝者1次Waza-ari,0次Ippon;對手0次Waza-ari":
-            contestType = 2
-        elif secondary_value == "類型3-勝者2次Waza-ari,0次Ippon;對手0次Waza-ari":
-            contestType = 3
-        elif secondary_value == "類型4-勝者2次Waza-ari,0次Ippon;對手1次Waza-ari":
-            contestType = 4
-        elif secondary_value == "類型5-勝者1次Ippon,0次Waza-ari;對手0次Waza-ari":
-            contestType = 5
-        elif secondary_value == "類型6-勝者1次Ippon,0次Waza-ari;對手1次Waza-ari":
-            contestType = 6
-        elif secondary_value == "類型7-勝者1次Ippon,1次Waza-ari;對手0次Waza-ari":
-            contestType = 7
-        elif secondary_value == "類型8-勝者1次Ippon,1次Waza-ari;對手1次Waza-ari":
-            contestType = 8
-        elif secondary_value == "類型0-不屬於以上任一類型":
-            contestType = 0
-
-        img_base64 = drawData_contestType_eventDistribution(df, year_data["label"],
-                                                            title=selected_function_text,
-                                                            contest_type=contestType,
-                                                            is_gradio=True)
-
-    elif selected_function_text == "比賽事件時序分布-小提琴圖":
-
-        df, info1, info2 = loadData_bySheetName(year_data["label"], SHEET_URL_VIZ, f"{selected_function}")
-
-        if secondary_value == "類型1-對手3次Shido或1次H":
-            contestType = 1
-        elif secondary_value == "類型2-勝者1次Waza-ari,0次Ippon;對手0次Waza-ari":
-            contestType = 2
-        elif secondary_value == "類型3-勝者2次Waza-ari,0次Ippon;對手0次Waza-ari":
-            contestType = 3
-        elif secondary_value == "類型4-勝者2次Waza-ari,0次Ippon;對手1次Waza-ari":
-            contestType = 4
-        elif secondary_value == "類型5-勝者1次Ippon,0次Waza-ari;對手0次Waza-ari":
-            contestType = 5
-        elif secondary_value == "類型6-勝者1次Ippon,0次Waza-ari;對手1次Waza-ari":
-            contestType = 6
-        elif secondary_value == "類型7-勝者1次Ippon,1次Waza-ari;對手0次Waza-ari":
-            contestType = 7
-        elif secondary_value == "類型8-勝者1次Ippon,1次Waza-ari;對手1次Waza-ari":
-            contestType = 8
-        elif secondary_value == "類型0-不屬於以上任一類型":
-            contestType = 0
-
-        img_base64 = drawData_contestType_eventDistribution_violin(df, year_data["label"],
-                                                                   title=selected_function_text,
-                                                                   contest_type=contestType,
-                                                                   is_gradio=True)
-
-    # b. 比賽時間 ------------------------------------------------------------
-    elif selected_function_text == "比賽時間>有無Ippon比賽":
-
-        # 全部/男子/女子
-        df, info1, info2 = loadData_bySheetName(year_data["label"], SHEET_URL_VIZ, f"{selected_function}>{secondary_value}")
-
-        img_base64 = drawData_duration_specified(df, label=year_data["label"],
-                                                 title=f"{secondary_value}的{selected_function_text.split('>')[0]}",
-                                                 legend_mapping={"TRUE": "有Ippon比賽", "FALSE": "無Ippon比賽"},
-                                                 is_gradio=True)
-
-    elif selected_function_text == "比賽時間>性別":
-
-        # 全部/有Ippon/無Ippon
-        df, info1, info2 = loadData_bySheetName(year_data["label"], SHEET_URL_VIZ, f"{selected_function}>{secondary_value}")
-
-        img_base64 = drawData_duration_stepcurve(df, label=year_data["label"],
-                                                 title=f"{secondary_value}的{selected_function_text.split('>')[0]}",
-                                                 is_gradio=True)
-
-    elif selected_function_text == "比賽時間>量級":
-
-        # 男子/女子
-        df, info1, info2 = loadData_bySheetName(year_data["label"], SHEET_URL_VIZ, f"{selected_function}>{secondary_value}")
-
-        img_base64 = drawData_duration_continuous(df, label=year_data["label"],
-                                                  title=f"{secondary_value}的{selected_function_text.split('>')[0]}",
-                                                  is_gradio=True)
-
-    elif selected_function_text == "比賽時間>對手Shido次數":
-
-        # 全部/有Ippon/無Ippon
-        df, info1, info2 = loadData_bySheetName(year_data["label"], SHEET_URL_VIZ, f"{selected_function}>{secondary_value}")
-
-        img_base64 = drawData_duration_specified(df, label=year_data["label"],
-                                                 title=f"{secondary_value}的{selected_function_text.split('>')[0]}",
-                                                 legend_mapping={"0": "對手0次Shido", "1": "對手1次Shido", "2": "對手2次Shido"},
-                                                 is_gradio=True)
-
-    elif selected_function_text == "有Ippon比賽時間>對手Shido時間":
-
-        # 對手0次Shido/對手1次Shido/對手2次Shido
-        df, info1, info2 = loadData_bySheetName(year_data["label"], SHEET_URL_VIZ, f"{selected_function}")
-
-        if secondary_value == "對手0次Shido":
-            shidoVal = 0
-        elif secondary_value == "對手1次Shido":
-            shidoVal = 1
-        elif secondary_value == "對手2次Shido":
-            shidoVal = 2
-
-        img_base64_1 = drawData_duration_ipponTime(df, year_data["label"], shido_val=shidoVal,
-                                                 title=f"{selected_function_text.replace('>', '&')} - {secondary_value}",
-                                                 is_gradio=True)
-        img_base64_2 = drawData_duration_ipponTime_bubble(df, year_data["label"], shido_val=shidoVal,
-                                           title=f"{selected_function_text.replace('>', '&')} - {secondary_value}",
-                                           is_gradio=True)
-
-        img_base64 = img_base64_1 + "<br><br>" + img_base64_2
-
-    # c. 事件間隔 ------------------------------------------------------------
-    elif selected_function_text == "事件間隔>有無Ippon比賽":
-
-        df, info1, info2 = loadData_bySheetName(year_data["label"], SHEET_URL_VIZ, selected_function)
-
-        if secondary_value == "勝者第1次Shido到結束":
-            field = "winner_shido_1_interval"
-        elif secondary_value == "勝者第2次Shido到結束":
-            field = "winner_shido_2_interval"
-        elif secondary_value == "勝者最後Shido到結束":
-            field = "winner_last_shido_interval"
-        elif secondary_value == "對手第1次Shido到結束":
-            field = "rival_shido_1_interval"
-        elif secondary_value == "對手第2次Shido到結束":
-            field = "rival_shido_2_interval"
-        elif secondary_value == "對手最後Shido到結束":
-            field = "rival_last_shido_interval"
-
-        img_base64 = drawData_eventInterval(df, label=year_data["label"], field=field,
-                                            title=f"{selected_function_text.replace('>', '&')} - {secondary_value}",
-                                            legend_mapping={"Ippon": "有Ippon比賽", "Non-ippon": "無Ippon比賽"},
-                                            is_gradio=True)
-
-    elif selected_function_text == "事件間隔>不同Shido次數下的獲勝機率":
-
-        df, info1, info2 = loadData_bySheetName(year_data["label"], SHEET_URL_VIZ, selected_function)
-
-        if secondary_value == "勝者0次Shido":
-            shidoVal = 0
-            role="winner"
-        elif secondary_value == "勝者1次Shido":
-            shidoVal = 1
-            role="winner"
-        elif secondary_value == "勝者2次Shido":
-            shidoVal = 2
-            role="winner"
-        elif secondary_value == "對手0次Shido":
-            shidoVal = 0
-            role="rival"
-        elif secondary_value == "對手1次Shido":
-            shidoVal = 1
-            role="rival"
-        elif secondary_value == "對手2次Shido":
-            shidoVal = 2
-            role="rival"
-
-        img_base64 = drawData_shidoLifeLines(df, label=year_data["label"],
-                                             title=f"{secondary_value}下的獲勝機率",
-                                             shido_val=shidoVal, role=role,
-                                             is_gradio=True)
-
-    # d. 量級 ------------------------------------------------------------
-    elif selected_function_text == "量級>有無Ippon比賽":
-
-        # 全部男子比賽/全部女子比賽
-        df, info1, info2 = loadData_bySheetName(year_data["label"], SHEET_URL_VIZ, f"{selected_function}>{secondary_value}")
-
-        img_base64 = drawData_category(df, label=year_data["label"],
-                                       title=f"{secondary_value}的{selected_function_text.split('>')[0]}",
-                                       legend_mapping={"TRUE": "有Ippon比賽", "FALSE": "無Ippon比賽"},
-                                       is_gradio=True)
-
-    # e. Ippon技術 ------------------------------------------------------------
-    elif selected_function_text == "Ippon技術分類>量級":
-
-        # 男子有Ippon比賽/女子有Ippon比賽
-        df, info1, info2 = loadData_bySheetName(year_data["label"], SHEET_URL_VIZ, f"{selected_function}")
-
-        if secondary_value == "男子有Ippon比賽":
-            gender = "men"
-        elif secondary_value == "女子有Ippon比賽":
-            gender = "women"
-
-        img_base64 = drawData_ipponGroup(df, label=year_data["label"], gender=gender,
-                                         title=f"{secondary_value}的{selected_function_text.split('>')[0]}",
-                                         is_gradio=True)
-
-    elif selected_function_text == "Ippon技術>量級":
-
-        # 男子有Ippon比賽/女子有Ippon比賽
-        df, info1, info2 = loadData_bySheetName(year_data["label"], SHEET_URL_VIZ, f"{selected_function}")
-
-        if secondary_value == "男子有Ippon比賽":
-            gender = "men"
-        elif secondary_value == "女子有Ippon比賽":
-            gender = "women"
-
-        img_base64 = drawData_ipponCode(df, label=year_data["label"], gender=gender,
-                                        title=f"{secondary_value}的{selected_function_text.split('>')[0]}",
-                                        is_gradio=True)
-
-    # f. 勝者國家 ------------------------------------------------------------
-    elif selected_function_text == "勝者國家>有無Ippon比賽":
-
-        df, info1, info2 = loadData_bySheetName(year_data["label"], SHEET_URL_VIZ, f"{selected_function}>{secondary_value}")
-
-        img_base64 = drawData_winnerCountry(df, label=year_data["label"],
-                                            title=f"{secondary_value}的{selected_function_text.split('>')[0]}",
-                                            legend_mapping={"TRUE": "有Ippon比賽", "FALSE": "無Ippon比賽"},
-                                            is_gradio=True)
-
-    elif selected_function_text == "勝者國家>對手Shido次數":
-
-        df, info1, info2 = loadData_bySheetName(year_data["label"], SHEET_URL_VIZ, f"{selected_function}>{secondary_value}")
-
-        img_base64 = drawData_winnerCountry(df, year_data["label"],
-                                            title=f"{secondary_value}的{selected_function_text.split('>')[0]}",
-                                            legend_mapping={"0": "對手0次Shido", "1": "對手1次Shido", "2": "對手2次Shido"},
-                                            is_gradio=True)
-
-    elif selected_function_text == "勝者國家>Ippon技術分類":
-
-        df, info1, info2 = loadData_bySheetName(year_data["label"], SHEET_URL_VIZ, f"{selected_function}>{secondary_value}")
-
-        img_base64 = drawData_winnerCountry(df, year_data["label"],
-                                            title=f"{secondary_value}的{selected_function_text.split('>')[0]}",
-                                            specified_cmap="tab20",
-                                            is_gradio=True)
-
-    elif selected_function_text == "勝者國家>Ippon技術分類(地圖)":
-
-        df, info1, info2 = loadData_bySheetName(year_data["label"], SHEET_URL_VIZ, f"{selected_function}>{secondary_value}")
-
-        img_base64 = drawData_winnerCountry_pie_map(df, df_olympic_countries, label=year_data["label"],
+            img_base64 = drawData_winnerCountry_map(df, df_olympic_countries, label=year_data["label"],
                                                     title=f"{secondary_value}的{selected_function_text.split('>')[0]}",
+                                                    is_gradio=True)
+
+        else: #elif ippon_main != "全部":
+            
+            ippon_group_name = None
+
+            if ippon_sub == "-" and ippon_child == "-":
+
+                df, info1, info2 = loadData_bySheetName(year_data["label"], SHEET_URL_VIZ, f"{selected_function}>{secondary_value}-1")
+                ippon_group_name = f"{ippon_main}"
+
+            elif ippon_child == "-":
+
+                df, info1, info2 = loadData_bySheetName(year_data["label"], SHEET_URL_VIZ, f"{selected_function}>{secondary_value}-2")
+                ippon_group_name = f"{ippon_main}:{ippon_sub}"
+
+            else:
+
+                df, info1, info2 = loadData_bySheetName(year_data["label"], SHEET_URL_VIZ, f"{selected_function}>{secondary_value}-3")
+                ippon_group_name = f"{ippon_main}:{ippon_sub}:{ippon_child}"
+
+            img_base64 = drawData_winnerCountry_map(df, df_olympic_countries, label=year_data["label"],
+                                                    title=f"{secondary_value}的{selected_function_text.split('>')[0]}",
+                                                    ippon_group_name=ippon_group_name,
                                                     is_gradio=True)
 
     return img_base64 if img_base64 else "<p>⚠️ 無圖表資料。</p>"
 
-# ===== 勝率預測 tab 模擬邏輯 =====
-def build_predict_tab_streamlit():
-    st.subheader("🏆 勝率預測工具")
-    col1, col2 = st.columns(2)
-
-    with col1:
-        shido = st.number_input("Shido 數", 0, 3, 1)
-        waza = st.radio("已有 Waza-ari？", ["有", "無"], index=0)
-        diff = st.number_input("世界排名差", value=-10)
-    with col2:
-        weight_rank = st.number_input("量級排名", value=10)
-        gender = st.radio("性別", ["男", "女"], index=0, horizontal=True)
-
-    st.button("預測")
-    st.success("模擬勝率：78.2%")
-
 import streamlit as st
 
-# ===== 主 UI 函式 =====
+# ===== 主 UI 函式（已移除比賽預測）=====
 def build_streamlit_ui():
     st.set_page_config(layout="wide")
     st.title("📊 柔道資料視覺化 UI")
@@ -838,50 +508,84 @@ def build_streamlit_ui():
     for i, tab_name in enumerate(tab_names):
         option_list = DROPDOWN_OPTIONS[tab_name]
         with tabs[i]:
-            if tab_name == "比賽預測":
-                build_predict_tab_streamlit()
-                continue
-
             if not option_list:
                 st.markdown("🏅 尚無屬性選項")
                 continue
 
+            # ✅ 主屬性下拉選單
             attribute_choices = [item[0] for item in option_list]
             default_attr = attribute_choices[0]
             attr = st.selectbox("選擇屬性", attribute_choices, key=f"{tab_name}_attr")
 
+            # ✅ 副屬性選單（若有）
             has_sub = attr in SECONDARY_DROPDOWN_MAP
             sub = None
             if has_sub:
                 sub_choices = SECONDARY_DROPDOWN_MAP[attr]
                 sub = st.selectbox("選擇屬性分類", sub_choices, key=f"{tab_name}_sub")
 
-            year_labels = [y["label"] for y in YEARS_DATA]
+            # ✅ Ippon 技術分類（僅當屬性為 Ippon 地圖時顯示）
+            ippon_main = ippon_sub = ippon_child = None
+            if attr == "勝者國家>Ippon技術分類(地圖)":
+                col1, col2, col3 = st.columns([1, 1, 1])
+                with col1:
+                    ippon_main = st.selectbox("主分類", list(IPPON_DROPDOWN_MAP_1.keys()), key=f"{tab_name}_ippon_main")
+                with col2:
+                    ippon_sub_choices = IPPON_DROPDOWN_MAP_1.get(ippon_main, ["-"])
+                    ippon_sub = st.selectbox("次分類", ippon_sub_choices, key=f"{tab_name}_ippon_sub")
+                with col3:
+                    ippon_child_choices = IPPON_DROPDOWN_MAP_2.get(ippon_sub, ["-"])
+                    ippon_child = st.selectbox("子分類", ippon_child_choices, key=f"{tab_name}_ippon_child")
+
+            # ✅ 年份選擇（奧運 → 世錦排序）
+            olympic_labels = [y["label"] for y in YEARS_DATA if y["game"] == "olympics"]
+            championship_labels = [y["label"] for y in YEARS_DATA if y["game"] == "championships"]
+            year_labels = olympic_labels + championship_labels
             year_label = st.radio("選擇賽事", year_labels, horizontal=True, key=f"{tab_name}_year")
 
+            # ✅ 從年份標籤找出 year_data
             year = year_label[:2]
             game = "olympics" if "奧運" in year_label else "championships"
             year_data = next((y for y in YEARS_DATA if y["year"] == year and y["game"] == game), None)
 
+            # ✅ 對應處理函式
             selected_function = next(v for k, v in option_list if k == attr)
             selected_function_text = attr
 
-            html = executeDrawData_2(year_data, selected_function, selected_function_text, sub)
+            # ✅ 呼叫圖表函式
+            html = executeDrawData_2(
+                year_data,
+                selected_function,
+                selected_function_text,
+                output=None,
+                secondary_value=sub,
+                ippon_main=ippon_main,
+                ippon_sub=ippon_sub,
+                ippon_child=ippon_child
+            )
 
+            # ✅ 顯示目前選擇
             st.markdown(f'''
 **✅ 目前選擇**
 - 分類：{tab_name}
 - 屬性：{attr}
 - 屬性分類：{sub if sub else '無'}
 - 賽事：{year_label}
-            ''')
-            st.components.v1.html(html, height=500, scrolling=True)
+- ippon戰技：{f"{ippon_main}:{ippon_sub}:{ippon_child}" if ippon_main else "無"}
+''')
 
+            # ✅ 顯示圖表
+            st.components.v1.html(html, height=600, scrolling=True)
+
+            # ✅ 除錯資訊
             debug = f'''year_data: {year_data}
 selected_function: {selected_function}
 selected_function_text: {selected_function_text}
-secondary_value: {sub}'''
-            st.text_area("📌 DEBUG 傳入參數", debug, height=150)
+secondary_value: {sub}
+ippon_main: {ippon_main}
+ippon_sub: {ippon_sub}
+ippon_child: {ippon_child}'''
+            st.text_area("📌 DEBUG 傳入參數", debug, height=160)
 
 # ===== 執行應用 =====
 if __name__ == "__main__":
