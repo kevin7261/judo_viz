@@ -311,7 +311,9 @@ import folium  # 用於地圖繪製
 import math  # 數學運算
 import pandas as pd  # 資料處理
 import seaborn as sns  # 色彩選擇
+from IPython.display import display, HTML  # 顯示 HTML 元素
 from matplotlib.colors import to_hex  # 將 RGB 顏色轉為 HEX 格式
+import ipywidgets as widgets  # Jupyter 的互動元件
 
 def drawData_winnerCountry_map(grouped_df: pd.DataFrame,
                                df_olympic_countries: pd.DataFrame,
@@ -433,8 +435,10 @@ def drawData_winnerCountry_map(grouped_df: pd.DataFrame,
             ''')
         ).add_to(m)
 
+    # ✅ 顯示地圖（根據 is_gradio 方式不同）
     html_output = f'<div style="width: {fig_width_px}px; height: {fig_height_px}px">{m._repr_html_()}</div>'
 
+    if is_gradio:
         return html_output
     else:
         html_widget = widgets.HTML(
@@ -444,6 +448,7 @@ def drawData_winnerCountry_map(grouped_df: pd.DataFrame,
         )
         display(html_widget)
 
+import gradio as gr
 from matplotlib import pyplot as plt
 import io, base64
 
@@ -460,6 +465,7 @@ def executeDrawData_2(year_data, selected_function, selected_function_text, outp
 
             img_base64 = drawData_winnerCountry_map(df, df_olympic_countries, label=year_data["label"],
                                                     title=f"{secondary_value}的{selected_function_text.split('>')[0]}",
+                                                    is_gradio=True)
 
         else: #elif ippon_main != "全部":
             
@@ -483,6 +489,7 @@ def executeDrawData_2(year_data, selected_function, selected_function_text, outp
             img_base64 = drawData_winnerCountry_map(df, df_olympic_countries, label=year_data["label"],
                                                     title=f"{secondary_value}的{selected_function_text.split('>')[0]}",
                                                     ippon_group_name=ippon_group_name,
+                                                    is_gradio=True)
 
     return img_base64 if img_base64 else "<p>⚠️ 無圖表資料。</p>"
 
@@ -577,6 +584,7 @@ ippon_main: {ippon_main}
 ippon_sub: {ippon_sub}
 ippon_child: {ippon_child}'''
             st.text_area("📌 DEBUG 傳入參數", debug, height=160)
+
 
 # ===== 執行應用 =====
 if __name__ == "__main__":
