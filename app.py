@@ -583,6 +583,3 @@ ippon_child: {ippon_child}'''
 if __name__ == "__main__":
     build_streamlit_ui()
 """
-
-# 真正執行 app_code
-exec(app_code)
