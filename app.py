@@ -1,5 +1,3 @@
-app_code = """
-
 SHEET_URL_VIZ = 'https://docs.google.com/spreadsheets/d/1A8wULZkw8SYx4_jkv2xbcUhaQuUEy1k-J_L8MpSkf-U/edit?usp=sharing'
 
 olympic_countries = [
@@ -582,4 +580,3 @@ ippon_child: {ippon_child}'''
 # ===== 執行應用 =====
 if __name__ == "__main__":
     build_streamlit_ui()
-"""
