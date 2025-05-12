@@ -614,9 +614,6 @@ def executeDrawData_2(year_data, selected_function, selected_function_text, outp
 # ✅ 匯入必要模組
 import streamlit as st
 
-# ✅ 定義需要顯示「選擇技術」欄位的屬性
-ATTR_WITH_IPPON_TECH_DROPDOWN = ["勝者國家>Ippon技術地圖"]
-
 # ===== 主 UI 函式（已移除比賽預測）=====
 def build_streamlit_ui():
     st.set_page_config(layout="wide")
