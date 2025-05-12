@@ -210,12 +210,16 @@ df_olympic_countries = pd.DataFrame(olympic_countries)
 # ===== 模擬資料結構（請替換為你實際的）=====
 DROPDOWN_OPTIONS = {
     "勝者國家": [
-        ("勝者國家>Ippon技術分類(地圖)", "勝者國家>Ippon技術分類(地圖)"),
+        ("勝者國家>Ippon技術分類地圖", "勝者國家>Ippon技術分類地圖"),
+        ("勝者國家>Ippon技術地圖", "勝者國家>Ippon技術地圖"),
     ],
 }
 
 SECONDARY_DROPDOWN_MAP = {
-    "勝者國家>Ippon技術分類(地圖)": ["全部Ippon比賽",
+    "勝者國家>Ippon技術分類地圖": ["全部Ippon比賽",
+                            "男子有Ippon比賽",
+                            "女子有Ippon比賽"],
+    "勝者國家>Ippon技術地圖": ["全部Ippon比賽",
                             "男子有Ippon比賽",
                             "女子有Ippon比賽"],
 }
@@ -232,6 +236,106 @@ YEARS_DATA = [
     {"year": "18", "game": "championships", "label": "18世錦", "source_sheet_id": "1pQsSvrtBL_AXfrDhrOhcuq9S_gv_Ipur3QfcxiSpJ3g"},
     {"year": "17", "game": "championships", "label": "17世錦", "source_sheet_id": "1BEzcYM8phoaimrzGcVEAN69ZPg8UxWpyPVAv9kSQaAM"},
 ]
+
+JUDO_TECHNIQUE = {
+  "AGR": {"en": "Ashi-garami", "zh": "足緘", "jp": "足緘", "group": "固技:関節技"},
+  "AGU": {"en": "Ashi-guruma", "zh": "足車", "jp": "足車", "group": "投技:立技:足技"},
+  "ASG": {"en": "Ashi-gatame", "zh": "足固", "jp": "足固め", "group": "固技:抑技"},
+  "DAB": {"en": "De-ashi-barai", "zh": "出足払", "jp": "出足払い", "group": "投技:立技:足技"},
+  "DAH": {"en": "De-ashi-harai", "zh": "出足払", "jp": "出足払い", "group": "投技:立技:足技"},
+  "DKW": {"en": "Daki-wakare", "zh": "抱分", "jp": "抱分かれ", "group": "投技:捨身技:前捨身技"},
+  "FUS": {"en": "Fusen-gachi", "zh": "不戰勝", "jp": "不戦勝ち", "group": "未分群"},
+  "GJJ": {"en": "Gyaku-juji-jime", "zh": "逆十字絞", "jp": "逆十字絞め", "group": "固技:絞技"},
+  "HAD": {"en": "Hadaka-jime", "zh": "裸絞", "jp": "裸絞め", "group": "固技:絞技"},
+  "HGT": {"en": "Hara-gatame", "zh": "腹固", "jp": "腹固め", "group": "固技:抑技"},
+  "HGG": {"en": "Harai-goshi-gaeshi", "zh": "払腰返", "jp": "払腰返し", "group": "投技:捨身技:前捨身技"},
+  "HIG": {"en": "Ude-hishigi-hiza-gatame", "zh": "腕挫膝固", "jp": "腕挫膝固め", "group": "固技:関節技"},
+  "HKG": {"en": "Hikikomi-gaeshi", "zh": "引込返", "jp": "引込返し", "group": "投技:捨身技:前捨身技"},
+  "HRG": {"en": "Harai-goshi", "zh": "払腰", "jp": "払い腰", "group": "投技:立技:腰技"},
+  "HRM": {"en": "Harai-makikomi", "zh": "払巻込", "jp": "払い巻き込み", "group": "投技:捨身技:橫捨身技"},
+  "HMK": {"en": "Hane-makikomi", "zh": "跳卷込", "jp": "跳ね巻き込み", "group": "投技:捨身技:橫捨身技"},
+  "HTA": {"en": "Harai-tsurikomi-ashi", "zh": "払釣込足", "jp": "払釣り込み足", "group": "投技:立技:足技"},
+  "HZG": {"en": "Hiza-guruma", "zh": "膝車", "jp": "膝車", "group": "投技:立技:足技"},
+  "HZT": {"en": "Hiza-gatame", "zh": "膝固", "jp": "膝固め", "group": "固技:抑技"},
+  "ISN": {"en": "Ippon-seoi-nage", "zh": "一本背負投", "jp": "一本背負い投げ", "group": "投技:立技:手技"},
+  "JG": {"en": "Ude-hishigi-juji-gatame", "zh": "腕挫十字固", "jp": "腕挫十字固め", "group": "固技:関節技"},
+  "JGA": {"en": "Juji-gatame", "zh": "十字固", "jp": "十字固め", "group": "固技:抑技"},
+  "JGT": {"en": "Ude-hishigi-juji-gatame", "zh": "腕挫十字固", "jp": "腕挫十字固め", "group": "固技:関節技"},
+  "KAG": {"en": "Kata-gatame", "zh": "肩固", "jp": "肩固め", "group": "固技:抑技"},
+  "KCG": {"en": "Ko-uchi-gaeshi", "zh": "小內返", "jp": "小内返し", "group": "投技:立技:不分群"},
+  "KEG": {"en": "Kesa-gatame", "zh": "袈裟固", "jp": "袈裟固め", "group": "固技:抑技"},
+  "KGU": {"en": "Kata-guruma", "zh": "肩車", "jp": "肩車", "group": "投技:立技:不分群"},
+  "KHJ": {"en": "Kataha-jime", "zh": "片羽絞", "jp": "片羽絞め", "group": "固技:絞技"},
+  "KIK": {"en": "Kiken-gachi", "zh": "棄權勝", "jp": "棄権勝ち", "group": "未分群"},
+  "KJJ": {"en": "Kata-juji-jime", "zh": "片十字絞", "jp": "片十字絞め", "group": "固技:絞技"},
+  "KKE": {"en": "Kuzure-kesa-gatame", "zh": "崩袈裟固", "jp": "崩れ袈裟固め", "group": "固技:抑技"},
+  "KKS": {"en": "Kuzure-kami-shiho-gatame", "zh": "崩上四方固", "jp": "崩れ上四方固め", "group": "固技:抑技"},
+  "KOG": {"en": "Koshi-guruma", "zh": "腰車", "jp": "腰車", "group": "投技:立技:腰技"},
+  "KSG": {"en": "Ko-soto-gari", "zh": "小外刈", "jp": "小外刈り", "group": "投技:立技:足技"},
+  "KSH": {"en": "Kami-shiho-gatame", "zh": "上四方固", "jp": "上四方固め", "group": "固技:抑技"},
+  "KSK": {"en": "Ko-soto-gake", "zh": "小外掛", "jp": "小外掛け", "group": "投技:立技:足技"},
+  "KTJ": {"en": "Katate-jime", "zh": "片手絞", "jp": "片手絞め", "group": "固技:絞技"},
+  "KUG": {"en": "Ko-uchi-gari", "zh": "小內刈", "jp": "小内刈り", "group": "投技:立技:足技"},
+  "KUM": {"en": "Ko-uchi-makikomi", "zh": "小內巻込", "jp": "小内巻き込み", "group": "投技:捨身技:橫捨身技"},
+  "OAH": {"en": "Okuri-ashi-harai", "zh": "送足払", "jp": "送り足払い", "group": "投技:立技:足技"},
+  "OEJ": {"en": "Okuri-eri-jime", "zh": "送襟絞", "jp": "送り襟絞め", "group": "固技:絞技"},
+  "OGA": {"en": "O-soto-gaeshi", "zh": "大外返", "jp": "大外返し", "group": "投技:立技:足技"},
+  "OGM": {"en": "O-guruma", "zh": "大車", "jp": "大車", "group": "投技:立技:足技"},
+  "OGO": {"en": "O-goshi", "zh": "大腰", "jp": "大腰", "group": "投技:立技:腰技"},
+  "OSA": {"en": "Osaekomi", "zh": "壓制", "jp": "抑え込み", "group": "固技:抑技"},
+  "OSG": {"en": "O-soto-gari", "zh": "大外刈", "jp": "大外刈り", "group": "投技:立技:足技"},
+  "OSM": {"en": "O-soto-makikomi", "zh": "大外巻込", "jp": "大外巻き込み", "group": "投技:捨身技:橫捨身技"},
+  "OSO": {"en": "O-soto-otoshi", "zh": "大外落", "jp": "大外落とし", "group": "投技:立技:手技"},
+  "OSU": {"en": "O-soto-guruma", "zh": "大外車", "jp": "大外車", "group": "投技:立技:足技"},
+  "OTG": {"en": "Obi-tori-gaeshi", "zh": "帶取返", "jp": "帯取返し", "group": "投技:捨身技:前捨身技"},
+  "OUC": {"en": "O-uchi-gaeshi", "zh": "大內返", "jp": "大内返し", "group": "投技:立技:不分群"},
+  "OUG": {"en": "O-uchi-gari", "zh": "大內刈", "jp": "大内刈り", "group": "投技:立技:足技"},
+  "SAJ": {"en": "Sankaku-jime", "zh": "三角絞", "jp": "三角絞め", "group": "固技:絞技"},
+  "SEI": {"en": "Seoi-nage", "zh": "背負投", "jp": "背負い投げ", "group": "投技:立技:手技"},
+  "SGJ": {"en": "Sode-guruma-jime", "zh": "袖車絞", "jp": "袖車絞め", "group": "固技:絞技"},
+  "SGT": {"en": "Ude-hishigi-sankaku-gatame", "zh": "腕挫三角固", "jp": "腕挫三角固め", "group": "固技:関節技"},
+  "SKG": {"en": "Sankaku-gatame", "zh": "三角固", "jp": "三角固め", "group": "固技:抑技"},
+  "SMK": {"en": "Soto-makikomi", "zh": "外巻込", "jp": "外巻き込み", "group": "投技:立技:不分群"},
+  "SON": {"en": "Seoi-nage", "zh": "背負投", "jp": "背負い投げ", "group": "投技:立技:手技"},
+  "SOO": {"en": "Seoi-otoshi", "zh": "背負落", "jp": "背負い落とし", "group": "投技:立技:手技"},
+  "SOT": {"en": "Sumi-otoshi", "zh": "隅落", "jp": "隅落とし", "group": "投技:立技:手技"},
+  "STA": {"en": "Sasae-tsurikomi-ashi", "zh": "支釣込足", "jp": "支え釣り込み足", "group": "投技:立技:足技"},
+  "STG": {"en": "Sode-tsurikomi-goshi", "zh": "袖釣込腰", "jp": "袖釣り込み腰", "group": "投技:立技:腰技"},
+  "SUG": {"en": "Sumi-gaeshi", "zh": "隅返", "jp": "隅返し", "group": "投技:捨身技:前捨身技"},
+  "SUK": {"en": "Sukui-nage", "zh": "掬投", "jp": "掬い投げ", "group": "投技:立技:手技"},
+  "TGO": {"en": "Tsuri-goshi", "zh": "釣腰", "jp": "釣り腰", "group": "投技:立技:腰技"},
+  "TGT": {"en": "Ude-hishigi-te-gatame", "zh": "腕挫手固", "jp": "腕挫手固め", "group": "固技:抑技"},
+  "TKG": {"en": "Tsurikomi-goshi", "zh": "釣込腰", "jp": "釣り込み腰", "group": "投技:立技:腰技"},
+  "TNG": {"en": "Tomoe-nage", "zh": "巴投", "jp": "巴投げ", "group": "投技:捨身技:前捨身技"},
+  "TNO": {"en": "Tani-otoshi", "zh": "谷落", "jp": "谷落とし", "group": "投技:捨身技:前捨身技"},
+  "TOS": {"en": "Tai-otoshi", "zh": "體落", "jp": "体落とし", "group": "投技:立技:手技"},
+  "TSG": {"en": "Tate-shiho-gatame", "zh": "縱四方固", "jp": "縦四方固め", "group": "固技:抑技"},
+  "TSU": {"en": "Tsubame-gaeshi", "zh": "燕返", "jp": "燕返し", "group": "投技:立技:不分群"},
+  "TWG": {"en": "Tawara-gaeshi", "zh": "俵返", "jp": "俵返し", "group": "投技:捨身技:前捨身技"},
+  "UDG": {"en": "Ude-gatame", "zh": "腕固", "jp": "腕固め", "group": "固技:抑技"},
+  "UGA": {"en": "Ude-hishigi-ude-gatame", "zh": "腕挫腕固", "jp": "腕挫腕固め", "group": "固技:関節技"},
+  "UGR": {"en": "Ude-garami", "zh": "腕緘", "jp": "腕緘", "group": "固技:関節技"},
+  "UGT": {"en": "Uki-gatame", "zh": "浮固", "jp": "浮固め", "group": "固技:抑技"},
+  "UKG": {"en": "Ushiro-kesa-gatame", "zh": "後袈裟固", "jp": "後ろ袈裟固め", "group": "固技:抑技"},
+  "UKI": {"en": "Uki-goshi", "zh": "浮腰", "jp": "浮腰", "group": "投技:立技:腰技"},
+  "USG": {"en": "Ushiro-goshi", "zh": "後腰", "jp": "後腰", "group": "投技:捨身技:後捨身技"},
+  "UMA": {"en": "Uchi-mata", "zh": "內股", "jp": "内股", "group": "投技:立技:不分群"},
+  "UMG": {"en": "Uchi-mata-gaeshi", "zh": "內股返", "jp": "内股返し", "group": "投技:捨身技:前捨身技"},
+  "UMK": {"en": "Uchi-makikomi", "zh": "內巻込", "jp": "内巻き込み", "group": "投技:捨身技:橫捨身技"},
+  "UMM": {"en": "Uchi-mata-makikomi", "zh": "內股巻込", "jp": "内股巻き込み", "group": "投技:捨身技:橫捨身技"},
+  "UMS": {"en": "Uchi-mata-sukashi", "zh": "內股透", "jp": "内股透かし", "group": "投技:立技:不分群"},
+  "UNA": {"en": "Ura-nage", "zh": "裏投", "jp": "裏投げ", "group": "投技:捨身技:前捨身技"},
+  "UNK": {"en": "Undetermined Katame-waza", "zh": "未定固技", "jp": "未定固め技", "group": "未分群"},
+  "UOT": {"en": "Uki-otoshi", "zh": "浮落", "jp": "浮落とし", "group": "投技:立技:手技"},
+  "URG": {"en": "Ura-gatame", "zh": "裏固", "jp": "裏固め", "group": "固技:抑技"},
+  "UTG": {"en": "Utsuri-goshi", "zh": "移腰", "jp": "移腰", "group": "投技:立技:腰技"},
+  "UWA": {"en": "Uki-waza", "zh": "浮技", "jp": "浮技", "group": "投技:立技:不分群"},
+  "YGA": {"en": "Yoko-gake", "zh": "橫掛", "jp": "横掛け", "group": "投技:捨身技:橫捨身技"},
+  "YGU": {"en": "Yoko-guruma", "zh": "橫車", "jp": "横車", "group": "投技:捨身技:橫捨身技"},
+  "YOT": {"en": "Yoko-otoshi", "zh": "橫落", "jp": "横落とし", "group": "投技:捨身技:橫捨身技"},
+  "YSG": {"en": "Yoko-shiho-gatame", "zh": "橫四方固", "jp": "横四方固め", "group": "固技:抑技"},
+  "WKG": {"en": "Waki-gatame", "zh": "腋固", "jp": "脇固め", "group": "固技:抑技"},
+}
 
 IPPON_DROPDOWN_MAP_1 = {
     "全部": ["-"],
@@ -251,21 +355,29 @@ IPPON_DROPDOWN_MAP_2 = {
     "捨身技": ["-", "前捨身技", "橫捨身技", "橫捨身技"],
 }
 
+IPPONTECH_DROPDOWN_MAP = []
+
+for key, value in JUDO_TECHNIQUE.items():
+    IPPONTECH_DROPDOWN_MAP.append(f"{key}:{value['group'].replace(':', '>')}")
+
 from urllib.parse import quote  # 對中文 sheet 名稱進行 URL 編碼
 
 SHEET_GID_MAPPING = {
- '勝者國家>Ippon技術分類(地圖)>全部Ippon比賽-1': '638546443',
- '勝者國家>Ippon技術分類(地圖)>男子有Ippon比賽-1': '1071718401',
- '勝者國家>Ippon技術分類(地圖)>女子有Ippon比賽-1': '1104268805',
- '勝者國家>Ippon技術分類(地圖)>全部Ippon比賽-2': '1946909308',
- '勝者國家>Ippon技術分類(地圖)>男子有Ippon比賽-2': '1435903933',
- '勝者國家>Ippon技術分類(地圖)>女子有Ippon比賽-2': '1484551104',
- '勝者國家>Ippon技術分類(地圖)>全部Ippon比賽-3': '572016594',
- '勝者國家>Ippon技術分類(地圖)>男子有Ippon比賽-3': '595503184',
- '勝者國家>Ippon技術分類(地圖)>女子有Ippon比賽-3': '1859043650',
- '勝者國家>Ippon技術分類(地圖)>全部Ippon比賽': '1298109612',
- '勝者國家>Ippon技術分類(地圖)>男子有Ippon比賽': '28792196',
- '勝者國家>Ippon技術分類(地圖)>女子有Ippon比賽': '942645638'}
+ '勝者國家>Ippon技術分類地圖>全部Ippon比賽': '1298109612',
+ '勝者國家>Ippon技術分類地圖>男子有Ippon比賽': '28792196',
+ '勝者國家>Ippon技術分類地圖>女子有Ippon比賽': '942645638',
+ '勝者國家>Ippon技術分類地圖>全部Ippon比賽-1': '638546443',
+ '勝者國家>Ippon技術分類地圖>男子有Ippon比賽-1': '1071718401',
+ '勝者國家>Ippon技術分類地圖>女子有Ippon比賽-1': '1104268805',
+ '勝者國家>Ippon技術分類地圖>全部Ippon比賽-2': '1946909308',
+ '勝者國家>Ippon技術分類地圖>男子有Ippon比賽-2': '1435903933',
+ '勝者國家>Ippon技術分類地圖>女子有Ippon比賽-2': '1484551104',
+ '勝者國家>Ippon技術分類地圖>全部Ippon比賽-3': '572016594',
+ '勝者國家>Ippon技術分類地圖>男子有Ippon比賽-3': '595503184',
+ '勝者國家>Ippon技術分類地圖>女子有Ippon比賽-3': '1859043650',
+ '勝者國家>Ippon技術地圖>全部Ippon比賽': '627767754',
+ '勝者國家>Ippon技術地圖>男子有Ippon比賽': '1675385436',
+ '勝者國家>Ippon技術地圖>女子有Ippon比賽': '1230658937'}
 
 def loadData_bySheetName(label: str, source_sheet_url: str, sheet_name: str):
 
@@ -449,12 +561,12 @@ def drawData_winnerCountry_map(grouped_df: pd.DataFrame,
 from matplotlib import pyplot as plt
 import io, base64
 
-def executeDrawData_2(year_data, selected_function, selected_function_text, output, 
-                      secondary_value=None, ippon_main=None, ippon_sub=None, ippon_child=None):
+def executeDrawData_2(year_data, selected_function, selected_function_text, output,
+                      secondary_value=None, ippon_main=None, ippon_sub=None, ippon_child=None, ippon_tech=None):
 
     img_base64 = None  # 預設為空
 
-    if selected_function_text == "勝者國家>Ippon技術分類(地圖)":
+    if selected_function_text == "勝者國家>Ippon技術分類地圖":
 
         if ippon_main == "全部":
 
@@ -465,7 +577,7 @@ def executeDrawData_2(year_data, selected_function, selected_function_text, outp
                                                     is_gradio=True)
 
         else: #elif ippon_main != "全部":
-            
+
             ippon_group_name = None
 
             if ippon_sub == "-" and ippon_child == "-":
@@ -488,9 +600,22 @@ def executeDrawData_2(year_data, selected_function, selected_function_text, outp
                                                     ippon_group_name=ippon_group_name,
                                                     is_gradio=True)
 
+    elif selected_function_text == "勝者國家>Ippon技術地圖":
+
+        df, info1, info2 = loadData_bySheetName(year_data["label"], SHEET_URL_VIZ, f"{selected_function}>{secondary_value}")
+
+        img_base64 = drawData_winnerCountry_map(df, df_olympic_countries, label=year_data["label"],
+                                                title=f"{secondary_value}的{selected_function_text.split('>')[0]}",
+                                                ippon_group_name=ippon_tech,
+                                                is_gradio=True)
+
     return img_base64 if img_base64 else "<p>⚠️ 無圖表資料。</p>"
 
+# ✅ 匯入必要模組
 import streamlit as st
+
+# ✅ 定義需要顯示「選擇技術」欄位的屬性
+ATTR_WITH_IPPON_TECH_DROPDOWN = ["勝者國家>Ippon技術地圖"]
 
 # ===== 主 UI 函式（已移除比賽預測）=====
 def build_streamlit_ui():
@@ -519,9 +644,9 @@ def build_streamlit_ui():
                 sub_choices = SECONDARY_DROPDOWN_MAP[attr]
                 sub = st.selectbox("選擇屬性分類", sub_choices, key=f"{tab_name}_sub")
 
-            # ✅ Ippon 技術分類（僅當屬性為 Ippon 地圖時顯示）
+            # ✅ Ippon 技術分類（僅當屬性為 Ippon 分類地圖時顯示）
             ippon_main = ippon_sub = ippon_child = None
-            if attr == "勝者國家>Ippon技術分類(地圖)":
+            if attr == "勝者國家>Ippon技術分類地圖":
                 col1, col2, col3 = st.columns([1, 1, 1])
                 with col1:
                     ippon_main = st.selectbox("主分類", list(IPPON_DROPDOWN_MAP_1.keys()), key=f"{tab_name}_ippon_main")
@@ -531,6 +656,11 @@ def build_streamlit_ui():
                 with col3:
                     ippon_child_choices = IPPON_DROPDOWN_MAP_2.get(ippon_sub, ["-"])
                     ippon_child = st.selectbox("子分類", ippon_child_choices, key=f"{tab_name}_ippon_child")
+
+            # ✅ Ippon 技術單選欄（僅當屬性為 Ippon 技術地圖時顯示）
+            ippon_tech = None
+            if attr == "勝者國家>Ippon技術地圖":
+                ippon_tech = st.selectbox("選擇技術", IPPONTECH_DROPDOWN_MAP, key=f"{tab_name}_ippon_tech")
 
             # ✅ 年份選擇（奧運 → 世錦排序）
             olympic_labels = [y["label"] for y in YEARS_DATA if y["game"] == "olympics"]
@@ -556,7 +686,8 @@ def build_streamlit_ui():
                 secondary_value=sub,
                 ippon_main=ippon_main,
                 ippon_sub=ippon_sub,
-                ippon_child=ippon_child
+                ippon_child=ippon_child,
+                ippon_tech=ippon_tech  # ✅ 傳入技術值參數
             )
 
             # ✅ 顯示圖表
@@ -569,9 +700,9 @@ selected_function_text: {selected_function_text}
 secondary_value: {sub}
 ippon_main: {ippon_main}
 ippon_sub: {ippon_sub}
-ippon_child: {ippon_child}'''
+ippon_child: {ippon_child}
+ippon_tech: {ippon_tech}'''
             st.text_area("📌 DEBUG 傳入參數", debug, height=160)
-
 
 # ===== 執行應用 =====
 if __name__ == "__main__":
