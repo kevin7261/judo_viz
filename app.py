@@ -1,4 +1,3 @@
-
 SHEET_URL_VIZ = 'https://docs.google.com/spreadsheets/d/1A8wULZkw8SYx4_jkv2xbcUhaQuUEy1k-J_L8MpSkf-U/edit?usp=sharing'
 
 olympic_countries = [
@@ -444,8 +443,8 @@ def drawData_winnerCountry_map(grouped_df: pd.DataFrame,
     fig_width_px = 1000  # 地圖寬度
     fig_height_px = 800  # 地圖高度
     twn_color = 'Crimson'  # 特別顯示台灣
-    min_radius = 2  # 最小圓形半徑
-    max_radius = 60  # 最大圓形半徑
+    min_radius = 5  # 最小圓形半徑
+    max_radius = 30  # 最大圓形半徑
     scale_factor = 1.0  # 縮放因子
 
     # ✅ 建立國家代碼對應經緯度座標
@@ -470,8 +469,34 @@ def drawData_winnerCountry_map(grouped_df: pd.DataFrame,
             col for col in df.columns
             if "=" in col and col.split("=", 1)[-1] == ippon_group_name
         ]
+
+        # ✅ 若找不到對應欄位，僅顯示空地圖（不畫任何資料）
         if not match_cols:
-            raise ValueError(f"❌ 無法對應到欄位：*= {ippon_group_name}")
+            print(f"⚠️ 找不到對應欄位（*= {ippon_group_name}），略過畫圖資料")
+
+            # ✅ 建立空地圖
+            m = folium.Map(
+                location=[20, 0],
+                zoom_start=2,
+                control_scale=True,
+                tiles='CartoDB PositronNoLabels',
+                width=fig_width_px,
+                height=fig_height_px
+            )
+
+            # ✅ 顯示地圖（根據 is_gradio）
+            html_output = f'<div style="width: {fig_width_px}px; height: {fig_height_px}px">{m._repr_html_()}</div>'
+            if is_gradio:
+                return html_output
+            else:
+                html_widget = widgets.HTML(
+                    value=html_output,
+                    placeholder='地圖載入中...',
+                    description=''
+                )
+                display(html_widget)
+            return  # ✅ 中止後續執行
+
         col_name = match_cols[0]  # ✅ 正確欄位名稱
         df["total"] = pd.to_numeric(df[col_name], errors="coerce").fillna(0).astype(int)
 
@@ -494,8 +519,8 @@ def drawData_winnerCountry_map(grouped_df: pd.DataFrame,
     # ✅ 計算數量的平方根範圍（用於圓形半徑正規化）
     min_count = df["total"].min()
     max_count = 15 #df["total"].max() # 寫死為15最大
-    min_sqrt = math.sqrt(min_count) if min_count > 0 else 0
-    max_sqrt = math.sqrt(max_count) if max_count > 0 else 1
+    min_sqrt = math.sqrt(min_count / math.pi) if min_count > 0 else 0
+    max_sqrt = math.sqrt(max_count / math.pi) if max_count > 0 else 1
     radius_range = max_radius - min_radius
 
     # ✅ 加入圓形與標籤
