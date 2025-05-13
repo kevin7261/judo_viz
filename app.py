@@ -1,3 +1,4 @@
+
 SHEET_URL_VIZ = 'https://docs.google.com/spreadsheets/d/1A8wULZkw8SYx4_jkv2xbcUhaQuUEy1k-J_L8MpSkf-U/edit?usp=sharing'
 
 olympic_countries = [
@@ -210,16 +211,16 @@ df_olympic_countries = pd.DataFrame(olympic_countries)
 # ===== 模擬資料結構（請替換為你實際的）=====
 DROPDOWN_OPTIONS = {
     "勝者國家": [
-        ("勝者國家>Ippon技術分類地圖", "勝者國家>Ippon技術分類地圖"),
-        ("勝者國家>Ippon技術地圖", "勝者國家>Ippon技術地圖"),
+        ("勝者國家>Ippon技術分類", "勝者國家>Ippon技術分類地圖"),
+        ("勝者國家>Ippon技術名稱", "勝者國家>Ippon技術名稱地圖"),
     ],
 }
 
 SECONDARY_DROPDOWN_MAP = {
-    "勝者國家>Ippon技術分類地圖": ["全部Ippon比賽",
+    "勝者國家>Ippon技術分類": ["全部Ippon比賽",
                             "男子有Ippon比賽",
                             "女子有Ippon比賽"],
-    "勝者國家>Ippon技術地圖": ["全部Ippon比賽",
+    "勝者國家>Ippon技術名稱": ["全部Ippon比賽",
                             "男子有Ippon比賽",
                             "女子有Ippon比賽"],
 }
@@ -375,9 +376,9 @@ SHEET_GID_MAPPING = {
  '勝者國家>Ippon技術分類地圖>全部Ippon比賽-3': '572016594',
  '勝者國家>Ippon技術分類地圖>男子有Ippon比賽-3': '595503184',
  '勝者國家>Ippon技術分類地圖>女子有Ippon比賽-3': '1859043650',
- '勝者國家>Ippon技術地圖>全部Ippon比賽': '627767754',
- '勝者國家>Ippon技術地圖>男子有Ippon比賽': '1675385436',
- '勝者國家>Ippon技術地圖>女子有Ippon比賽': '1230658937'}
+ '勝者國家>Ippon技術名稱地圖>全部Ippon比賽': '627767754',
+ '勝者國家>Ippon技術名稱地圖>男子有Ippon比賽': '1675385436',
+ '勝者國家>Ippon技術名稱地圖>女子有Ippon比賽': '1230658937'}
 
 def loadData_bySheetName(label: str, source_sheet_url: str, sheet_name: str):
 
@@ -566,7 +567,7 @@ def executeDrawData_2(year_data, selected_function, selected_function_text, outp
 
     img_base64 = None  # 預設為空
 
-    if selected_function_text == "勝者國家>Ippon技術分類地圖":
+    if selected_function_text == "勝者國家>Ippon技術分類":
 
         if ippon_main == "全部":
 
@@ -600,7 +601,7 @@ def executeDrawData_2(year_data, selected_function, selected_function_text, outp
                                                     ippon_group_name=ippon_group_name,
                                                     is_gradio=True)
 
-    elif selected_function_text == "勝者國家>Ippon技術地圖":
+    elif selected_function_text == "勝者國家>Ippon技術名稱":
 
         df, info1, info2 = loadData_bySheetName(year_data["label"], SHEET_URL_VIZ, f"{selected_function}>{secondary_value}")
 
@@ -656,7 +657,7 @@ def build_streamlit_ui():
 
             # ✅ Ippon 技術單選欄（僅當屬性為 Ippon 技術地圖時顯示）
             ippon_tech = None
-            if attr == "勝者國家>Ippon技術地圖":
+            if attr == "勝者國家>Ippon技術名稱地圖":
                 ippon_tech = st.selectbox("選擇技術", IPPONTECH_DROPDOWN_MAP, key=f"{tab_name}_ippon_tech")
 
             # ✅ 年份選擇（奧運 → 世錦排序）
