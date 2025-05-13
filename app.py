@@ -493,7 +493,7 @@ def drawData_winnerCountry_map(grouped_df: pd.DataFrame,
 
     # ✅ 計算數量的平方根範圍（用於圓形半徑正規化）
     min_count = df["total"].min()
-    max_count = df["total"].max()
+    max_count = 15 #df["total"].max() # 寫死為15最大
     min_sqrt = math.sqrt(min_count) if min_count > 0 else 0
     max_sqrt = math.sqrt(max_count) if max_count > 0 else 1
     radius_range = max_radius - min_radius
