@@ -365,6 +365,8 @@ for key, value in JUDO_TECHNIQUE.items():
     code = key
     IPPONTECH_DROPDOWN_MAP.append(f"{group} : {name_zh} ({name_en}, {code})")
 
+IPPONTECH_DROPDOWN_MAP = sorted(IPPONTECH_DROPDOWN_MAP)
+
 from urllib.parse import quote  # 對中文 sheet 名稱進行 URL 編碼
 
 SHEET_GID_MAPPING = {
