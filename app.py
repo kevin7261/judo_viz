@@ -648,7 +648,7 @@ def build_streamlit_ui():
 
             # ✅ Ippon 技術分類（僅當屬性為 Ippon 分類地圖時顯示）
             ippon_main = ippon_sub = ippon_child = None
-            if attr == "勝者國家>Ippon技術分類地圖":
+            if attr == "勝者國家>Ippon技術分類":
                 col1, col2, col3 = st.columns([1, 1, 1])
                 with col1:
                     ippon_main = st.selectbox("主分類", list(IPPON_DROPDOWN_MAP_1.keys()), key=f"{tab_name}_ippon_main")
@@ -661,7 +661,7 @@ def build_streamlit_ui():
 
             # ✅ Ippon 技術單選欄（僅當屬性為 Ippon 技術地圖時顯示）
             ippon_tech = None
-            if attr == "勝者國家>Ippon技術名稱地圖":
+            if attr == "勝者國家>Ippon技術名稱":
                 ippon_tech = st.selectbox("選擇技術", IPPONTECH_DROPDOWN_MAP, key=f"{tab_name}_ippon_tech")
 
             # ✅ 年份選擇（奧運 → 世錦排序）
