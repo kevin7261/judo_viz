@@ -359,7 +359,11 @@ IPPON_DROPDOWN_MAP_2 = {
 IPPONTECH_DROPDOWN_MAP = []
 
 for key, value in JUDO_TECHNIQUE.items():
-    IPPONTECH_DROPDOWN_MAP.append(f"{key}:{value['group'].replace(':', '>')}")
+    name_en = value['en']
+    name_zh = value['zh']
+    group = value['group'].replace(':', ' > ')
+    code = key
+    IPPONTECH_DROPDOWN_MAP.append(f"{group} : {name_zh} ({name_en}, {code})")
 
 from urllib.parse import quote  # 對中文 sheet 名稱進行 URL 編碼
 
